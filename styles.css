@@ -278,7 +278,7 @@ h1 {
   margin-bottom: 0;
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .resume-shell {
     width: 100%;
     margin: 0;
@@ -320,21 +320,237 @@ h1 {
   }
 }
 
+/* A4 export: keep browser layout separate from the paginated resume. */
+@page {
+  size: A4;
+  margin: 13mm 15mm;
+}
+
 @media print {
   body {
     background: #ffffff;
+    color: #182235;
+    font-size: 10pt;
+    line-height: 1.55;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .resume-shell {
     width: 100%;
     margin: 0;
     border: 0;
+    border-radius: 0;
     box-shadow: none;
+    overflow: visible;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: start;
+    padding: 14px 0 16px;
+    border-top: 3px solid var(--primary);
+  }
+
+  .hero__mark,
+  .icon {
+    display: none;
+  }
+
+  .eyebrow {
+    margin-bottom: 5px;
+    font-size: 10pt;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-size: 27pt;
+    line-height: 1.1;
+  }
+
+  .hero__summary {
+    font-size: 9.5pt;
+    color: #465569;
+  }
+
+  .contact {
+    min-width: 0;
+    gap: 5px;
+    padding-top: 4px;
+    font-size: 9pt;
+  }
+
+  .contact a,
+  .contact span {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 14px 24px;
+    padding: 16px 0;
+    background: none;
+    border: 0;
+  }
+
+  .panel + .panel {
+    margin-top: 0;
+  }
+
+  .panel:last-child {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+
+  .panel:last-child h2,
+  .panel:last-child p {
+    margin: 0;
+  }
+
+  .panel h2,
+  .section h2 {
+    margin-bottom: 9px;
+    font-size: 12pt;
+  }
+
+  .panel h3 {
+    margin: 10px 0 5px;
+    font-size: 10pt;
+  }
+
+  .panel h2 + h3 {
+    margin-top: 0;
+  }
+
+  .plain-list {
+    font-size: 9.5pt;
+  }
+
+  .plain-list li + li,
+  .timeline-item li + li,
+  .project-card li + li {
+    margin-top: 4px;
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  .section + .section {
+    break-before: page;
+    margin-top: 0;
+  }
+
+  .section-heading {
+    margin-bottom: 13px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--line);
+    break-after: avoid;
+  }
+
+  .section-heading h2 {
+    margin: 0;
   }
 
   .timeline-item,
-  .project-card,
-  .section--summary {
+  .project-card {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
     break-inside: avoid;
+  }
+
+  .timeline-item + .timeline-item {
+    margin-top: 14px;
+  }
+
+  .project-card + .project-card {
+    margin-top: 18px;
+    padding-top: 13px;
+    border-top: 1px solid var(--line);
+  }
+
+  .item-head {
+    gap: 12px;
+    margin-bottom: 5px;
+    align-items: baseline;
+  }
+
+  .item-head > div {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .item-head h3 {
+    margin: 0;
+    font-size: 11pt;
+  }
+
+  .item-head p,
+  .item-head time,
+  .item-head > span {
+    font-size: 9pt;
+  }
+
+  .item-head time {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .project-card p {
+    margin-bottom: 6px;
+  }
+
+  .project-card a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .tags {
+    display: block;
+    line-height: 1.65;
+  }
+
+  .tags span {
+    display: inline-block;
+    white-space: nowrap;
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: #465569;
+    font-size: 9pt;
+    line-height: inherit;
+  }
+
+  .tags span:not(:last-child)::after {
+    content: " / ";
+    color: #94a3b8;
+  }
+
+  .project-card .tags {
+    margin-top: 6px;
+  }
+
+  p,
+  li {
+    orphans: 2;
+    widows: 2;
   }
 }
